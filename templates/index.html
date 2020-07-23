@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hello, world!</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  </head>
+  <body class="bg-light">
+    
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'index' %}">Olender</a>
+    </nav>
+
+    <main class="pt-3 pb-4 vh-100">
+
+      <h1 class="text-center mb-5">Стихи русских поэтов</h1>
+
+      <div class="container">
+        <div class="row">
+
+          {% for poet in poets %}
+          <div class="col-6 col-md-3 col-xl-4">
+            <div class="card">
+              <div class="card-body">
+                {% if poet.photo_url %}
+                  <img src="{{ poet.photo_url }}" alt="{{ poet }}" class="img-fluid rounded-circle"></div>
+                {% endif %}
+                <h5 class="text-center"><a href="">{{ poet }}</a></h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <p class="text-center text-muted">© Yandex.Praktikum {% now "Y" %}</p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
