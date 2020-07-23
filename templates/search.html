@@ -26,7 +26,7 @@
           
           <div class="col-12 col-md-10 col-xl-8 mx-auto">
             
-            <div class="card">
+            <div class="card mb-3">
               <div class="card-body">
                 <form method="GET" action="{% url 'search' %}">
                   <div class="input-group mb-3">
@@ -38,22 +38,19 @@
                 </form>
               </div>
             </div>
-
-            {% for result in results %}
             
-              <div class="card">
-                <div class="card-body">
+            <div class="card">
+              <div class="card-body">
+                <h4>Результаты поиска:</h4>
+                {% for result in results %}
                   <p><a href="{{ result.get_absolute_url }}">{{ result }}</a></p>
-                </div>
+                {% empty %}
+                  {% if search %}
+                    <p class="lead">Ничего не найдено :(</p>
+                  {% endif %}
+                {% endfor %}
               </div>
-            
-            {% empty %}
-              
-              {% if search %}
-                <p class="lead">Ничего не найдено :(</p>
-              {% endif %}
-
-            {% endfor %}
+            </div>
           </div>
 
         </div>
