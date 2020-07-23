@@ -17,9 +17,13 @@ def poet_view(request, poet_pk):
     template_name = 'poet.html'
 
     poet = get_object_or_404(Poet, pk=poet_pk)
+    poems = poet.poem_set.all()
+    divide_at = poems.count() // 2
 
     context = {
         'poet': poet,
+        'poems': poet.poem_set.all(),
+        'divide_at': divide_at
     }
     return render(request, template_name, context)
 

@@ -24,15 +24,20 @@
       <div class="container">
         <div class="row">
 
-          {% for poem in poems %}
-          <div class="col-6 col-md-3 col-xl-4">
-            <div class="card">
-              <div class="card-body">
-                <p><a href="">{{ poem }}</a></p>
+          
+          <div class="col-12 col-md-6">
+            {% for poem in poems %}
+              <div class="card">
+                <div class="card-body">
+                  <p><a href="{{ poem.get_absolute_url }}">{{ poem }}</a></p>
+                </div>
               </div>
-            </div>
+              {% if forloop.counter == divide_at %}
+                </div>
+                <div class="col-12 col-md-6">
+              {% endif %}
+            {% endfor %}
           </div>
-          {% endfor %}
 
         </div>
       </div>
