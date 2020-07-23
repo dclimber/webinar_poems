@@ -25,9 +25,10 @@
           <div class="col-12 col-md-10 col-lg-8 mx-auto">
             <div class="card">
               <div class="card-body">
-                <h1 class="text-center mb-5">Стихотворение {{ poem }}</h1>
-
-                {{ poem.text|linebreaksbr }}
+                <h1 class="text-center mb-5">{{ poem }}</h1>
+                <div class="poem-text">
+                  {{ poem.text|linebreaksbr }}
+                </div>
               </div>
             </div>
           </div>
