@@ -11,6 +11,7 @@ class Poet(models.Model):
     photo_url = models.URLField('Ссылка на фото', null=True, blank=True)
 
     class Meta:
+        ordering = ('first_name',)
         verbose_name = 'Поэт(эсса)'
 
     def __str__(self):
