@@ -35,3 +35,6 @@ class Poem(models.Model):
     def __str__(self):
         return (self.title if self.title is not None
                 else textwrap.wrap(self.text)[0])
+
+    def get_absolute_url(self):
+        return reverse('poem', args=(self.pk,))
