@@ -1,5 +1,6 @@
 import textwrap
 from django.db import models
+from django.urls import reverse
 
 
 class Poet(models.Model):
@@ -16,6 +17,9 @@ class Poet(models.Model):
         return (f"{self.first_name} {self.last_name}"
                 if self.last_name is not None
                 else f"{self.first_name}")
+
+    def get_absolute_url(self):
+        return reverse('poet', args=(self.pk,))
 
 
 class Poem(models.Model):
