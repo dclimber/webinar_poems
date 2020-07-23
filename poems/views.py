@@ -37,3 +37,13 @@ def poem_view(request, poem_pk):
         'poem': poem,
     }
     return render(request, template_name, context)
+
+
+def search(request):
+    template_name = 'search.html'
+    search = False
+
+    context = {
+        'search': search,
+    }
+    return render(request, template_name, context)
