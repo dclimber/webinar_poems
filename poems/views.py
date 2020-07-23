@@ -4,7 +4,7 @@ from .models import Poet, Poem
 
 
 def index(request):
-    template_name = 'index.html'
+    template_name = 'poems/index.html'
     poets = list(Poet.objects.all())
 
     context = {
@@ -14,7 +14,7 @@ def index(request):
 
 
 def poet_view(request, poet_pk):
-    template_name = 'poet.html'
+    template_name = 'poems/poet.html'
 
     poet = get_object_or_404(Poet, pk=poet_pk)
     poems = poet.poem_set.all()
@@ -29,7 +29,7 @@ def poet_view(request, poet_pk):
 
 
 def poem_view(request, poem_pk):
-    template_name = 'poem.html'
+    template_name = 'poems/poem.html'
 
     poem = get_object_or_404(Poem, pk=poem_pk)
 

@@ -5,7 +5,7 @@ from poems.models import Poet, Poem
 
 
 def search(request):
-    template_name = 'search.html'
+    template_name = 'poems/search.html'
     search = False
 
     query = request.GET.get('q', None)
