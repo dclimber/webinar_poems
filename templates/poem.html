@@ -19,6 +19,15 @@
 
     <main class="pt-3 pb-4 min-vh-100">
 
+      <div class="d-flex">
+        <div>
+          <a class="btn btn-info-outline btn-sm" href="{% url 'poet' poet_pk=poem.author.pk %}">← Назад</a>
+        </div>
+        <div class="flex-grow-1">
+          <h1 class="text-center mb-5">Стихи {{ poet }}</h1>
+        </div>
+      </div>
+
       <div class="container">
         <div class="row">
 
