@@ -22,3 +22,14 @@ def poet_view(request, poet_pk):
         'poet': poet,
     }
     return render(request, template_name, context)
+
+
+def poem_view(request, poem_pk):
+    template_name = 'poem.html'
+
+    poem = get_object_or_404(Poem, pk=poem_pk)
+
+    context = {
+        'poem': poem,
+    }
+    return render(request, template_name, context)
