@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField(verbose_name='Текст')),
-                ('title', models.CharField(blank=True, max_length=250, null=True, verbose_name='Название')),
+                ('title', models.CharField(max_length=250, verbose_name='Название')),
                 ('year', models.CharField(blank=True, max_length=50, null=True, verbose_name='Год(ы)')),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='poems.Poet', verbose_name='Автор(ша)')),
             ],

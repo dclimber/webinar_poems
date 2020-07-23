@@ -25,16 +25,16 @@ class Poet(models.Model):
 class Poem(models.Model):
     author = models.ForeignKey('Poet', on_delete=models.CASCADE,
                                verbose_name="Автор(ша)")
-    title = models.CharField('Название', max_length=250, blank=True, null=True)
+    title = models.CharField('Название', max_length=250)
     text = models.TextField('Текст')
     year = models.CharField('Год(ы)', max_length=50, blank=True, null=True)
 
     class Meta:
+        ordering = ('title',)
         verbose_name = 'Стихотворение'
 
     def __str__(self):
-        return (self.title if self.title is not None
-                else textwrap.wrap(self.text)[0])
+        return self.title
 
     def get_absolute_url(self):
         return reverse('poem', args=(self.pk,))
