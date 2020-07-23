@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Стихи русских поэтов | Olender</title>
+    <title>Стихи великих поэтов | Olender</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -19,7 +19,7 @@
 
     <main class="pt-3 pb-4 min-vh-100">
 
-      <h1 class="text-center mb-5">Стихи русских поэтов</h1>
+      <h1 class="text-center mb-5">Стихи великих поэтов</h1>
 
       <div class="container">
         <div class="row">
@@ -31,7 +31,7 @@
                 {% if poet.photo_url %}
                   <img src="{{ poet.photo_url }}" alt="{{ poet }}" class="img-fluid rounded-circle"></div>
                 {% endif %}
-                <h5 class="text-center"><a href="{{ poet.get_absolute_url }}">{{ poet }}</a></h5>
+                <h5 class="text-center"><a href="{{ poet.get_absolute_url }}">{{ poet.full_name }}</a></h5>
               </div>
             </div>
           </div>

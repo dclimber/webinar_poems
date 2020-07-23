@@ -24,7 +24,7 @@
           <a class="btn btn-info-outline btn-sm" href="{% url 'index' %}">← Назад</a>
         </div>
         <div class="flex-grow-1">
-          <h1 class="text-center mb-5">Стихи {{ poet }}</h1>
+          <h1 class="text-center mb-5">Стихи {{ poet.full_name }}</h1>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
             {% for poem in poems %}
               <div class="card">
                 <div class="card-body">
-                  <p><a href="{{ poem.get_absolute_url }}">{{ poem }}</a></p>
+                  <p><a href="{{ poem.get_absolute_url }}">{{ poem.title }}</a></p>
                 </div>
               </div>
               {% if forloop.counter == divide_at %}
