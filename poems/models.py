@@ -15,6 +15,10 @@ class Poet(models.Model):
         verbose_name = 'Поэт(эсса)'
 
     def __str__(self):
+        return f"Поэт(эсса): {self.full_name}"
+
+    @property
+    def full_name(self):
         return (f"{self.first_name} {self.last_name}"
                 if self.last_name is not None
                 else f"{self.first_name}")
@@ -35,7 +39,7 @@ class Poem(models.Model):
         verbose_name = 'Стихотворение'
 
     def __str__(self):
-        return self.title
+        return f"Стихотворение: {self.title}"
 
     def get_absolute_url(self):
         return reverse('poem', args=(self.pk,))
