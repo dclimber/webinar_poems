@@ -10,14 +10,18 @@
 
     {% for poet in poets %}
     <div class="col-6 col-md-4 col-xl-3">
-      <div class="card mb-2">
+
+      <div class="card mb-3">
+        {% if poet.photo_url %}
+          <img src="{{ poet.photo_url }}" class="card-img-top poet-card-img" alt="{{ poet }}">
+        {% endif %}
         <div class="card-body">
-          {% if poet.photo_url %}
-            <img src="{{ poet.photo_url }}" alt="{{ poet }}" class="img-fluid rounded-circle"></div>
-          {% endif %}
-          <h5 class="text-center"><a href="{{ poet.get_absolute_url }}">{{ poet.full_name }}</a></h5>
+          <p class="card-text">
+            <a href="{{ poet.get_absolute_url }}">{{ poet.full_name }}</a>
+          </p>
         </div>
       </div>
+
     </div>
     {% endfor %}
 
