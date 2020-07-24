@@ -5,6 +5,13 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'admin:index' %}">Админ-панель <span class="sr-only">(current)</span></a>
+        </li>
+      {% endif %}
+    </ul>
     <form class="form-inline my-2 my-lg-0 ml-auto" method="GET" action="{% url 'search' %}">
       <input class="form-control mr-sm-2" type="search" name="q" placeholder="Имя, название или текст" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Искать</button>
