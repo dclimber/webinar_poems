@@ -58,9 +58,9 @@ def parse_html_file(filepath: str) -> List[TextPoem]:
             )
             text = src_poem.css(
                     'div.poem-text.font-size-larger::text'
-                ).get()
+                ).get().strip()
             # create TextPoem, if text is not empty
-            if text.strip() != '':
+            if text != '':
                 title = get_title(titles_src[idx], text)
 
                 poem = TextPoem(title, text)
