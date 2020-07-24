@@ -8,9 +8,9 @@ class TextPoem:
         title: str, text: str,
         year: Optional[str] = None
     ) -> None:
-        self.title = title
-        self.text = text
-        self.year = year
+        self.title: str = title
+        self.text: str = text
+        self.year: Optional[str] = year
 
     def __str__(self) -> str:
         year: str = ''
@@ -49,6 +49,7 @@ def parse_html_file(filepath: str) -> List[TextPoem]:
         titles_src: Selector = sel.css('h2::text')
         poems_src: Selector = sel.css('div.poem')
         quanity: int = min(len(titles_src), len(poems_src))
+
         # iterate through poems
         for idx in range(quanity):
             # get poem text
@@ -56,16 +57,17 @@ def parse_html_file(filepath: str) -> List[TextPoem]:
             cats_src: Selector = src_poem.css(
                 'a.btn.btn-outline-secondary::text'
             )
-            text = src_poem.css(
+            text: str = src_poem.css(
                     'div.poem-text.font-size-larger::text'
                 ).get().strip()
+
             # create TextPoem, if text is not empty
             if text != '':
-                title = get_title(titles_src[idx], text)
+                title: str = get_title(titles_src[idx], text)
 
-                poem = TextPoem(title, text)
-
+                poem: TextPoem = TextPoem(title, text)
                 if len(cats_src) >= 1:
                     poem.year = cats_src[0].get()
                 result.append(poem)
+
     return result
