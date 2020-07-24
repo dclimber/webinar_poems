@@ -16,9 +16,9 @@
 
     <div class="col-12 col-md-6">
       {% for poem in poems %}
-        <div class="card">
-          <div class="card-body">
-            <p><a href="{{ poem.get_absolute_url }}">{{ poem.title }}</a></p>
+        <div class="card mb-2">
+          <div class="card-body py-2">
+            <p class="mb-0"><a href="{{ poem.get_absolute_url }}">{{ poem.title }}</a></p>
           </div>
         </div>
         {% if forloop.counter == divide_at %}
