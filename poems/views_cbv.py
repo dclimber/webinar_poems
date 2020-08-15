@@ -13,7 +13,6 @@ class Index(ListView):
 
 class PoetView(DetailView):
     model = Poet
-    context_object_name = 'poet'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -30,7 +29,6 @@ class PoetView(DetailView):
 
 class PoemView(DetailView):
     model = Poem
-    context_object_name = 'poem'
 
 
 class PoemCreate(LoginRequiredMixin, CreateView):
