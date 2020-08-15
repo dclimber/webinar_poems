@@ -4,15 +4,15 @@ from . import views
 
 fbv_patterns = [
     path("", views.index, name="index"),
-    path("poet/<int:poet_pk>/", views.poet_view, name="poet"),
-    path("poet/add/", views.add_poet, name="add_poet"),
-    path("poet/<int:poet_pk>/edit/", views.update_poet, name="update_poet"),
-    path("poet/<int:poet_pk>/delete/", views.delete_poet, name="delete_poet"),
+    path("poet/<int:pk>/", views.poet_view, name="poet"),
+    path("poet/add/", views.poet_create, name="add_poet"),
+    path("poet/<int:pk>/edit/", views.poet_update, name="update_poet"),
+    path("poet/<int:pk>/delete/", views.poet_delete, name="delete_poet"),
 
-    path("poem/<int:poem_pk>/", views.poem_view, name="poem"),
-    path("poem/add/", views.add_poem, name="add_poem"),
-    path("poem/<int:poem_pk>/edit/", views.update_poem, name="update_poem"),
-    path("poem/<int:poem_pk>/delete/", views.delete_poem, name="delete_poem"),
+    path("poem/<int:pk>/", views.poem_view, name="poem"),
+    path("poem/add/", views.poem_create, name="add_poem"),
+    path("poem/<int:pk>/edit/", views.poem_update, name="update_poem"),
+    path("poem/<int:pk>/delete/", views.poem_delete, name="delete_poem"),
 ]
 
 cbv_patterns = [

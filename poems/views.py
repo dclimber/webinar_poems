@@ -6,7 +6,7 @@ from .models import Poet, Poem
 
 
 def index(request):
-    template_name = 'poems/index.html'
+    template_name = 'poems/poet_list.html'
     poets = list(Poet.objects.all())
 
     context = {
@@ -15,10 +15,10 @@ def index(request):
     return render(request, template_name, context)
 
 
-def poet_view(request, poet_pk):
-    template_name = 'poems/poet.html'
+def poet_view(request, pk):
+    template_name = 'poems/poet_detail.html'
 
-    poet = get_object_or_404(Poet, pk=poet_pk)
+    poet = get_object_or_404(Poet, pk=pk)
     poems = poet.poem_set.all()
     divide_at = poems.count() // 2
 
@@ -30,10 +30,10 @@ def poet_view(request, poet_pk):
     return render(request, template_name, context)
 
 
-def poem_view(request, poem_pk):
-    template_name = 'poems/poem.html'
+def poem_view(request, pk):
+    template_name = 'poems/poem_detail.html'
 
-    poem = get_object_or_404(Poem, pk=poem_pk)
+    poem = get_object_or_404(Poem, pk=pk)
 
     context = {
         'poem': poem,
@@ -42,11 +42,12 @@ def poem_view(request, poem_pk):
 
 
 @login_required
-def add_poem(request):
+def poem_create(request):
     template_name = 'poems/poem_form.html'
     # set author if provided
     poet_pk = request.GET.get('poet', None)
     initial = {}
+
     if poet_pk is not None:
         poet = Poet.objects.filter(pk=poet_pk).first()
         if poet is not None:
@@ -58,13 +59,13 @@ def add_poem(request):
         if form.is_valid():
             poem = form.save()
             return redirect(poem.get_absolute_url())
-    return render(request, template_name, {'form': form, 'poet_pk': poet_pk})
+    return render(request, template_name, {'form': form})
 
 
 @login_required
-def update_poem(request, poem_pk):
+def poem_update(request, pk):
     template_name = 'poems/poem_form.html'
-    poem = get_object_or_404(Poem, pk=poem_pk)
+    poem = get_object_or_404(Poem, pk=pk)
     form = PoemForm(instance=poem)
     if request.method == 'POST':
         form = PoemForm(request.POST)
@@ -75,9 +76,9 @@ def update_poem(request, poem_pk):
 
 
 @login_required
-def delete_poem(request, poem_pk):
+def poem_delete(request, pk):
     template_name = 'poems/poem_confirm_delete.html'
-    poem = get_object_or_404(Poem, pk=poem_pk)
+    poem = get_object_or_404(Poem, pk=pk)
     poet_url = poem.author.get_absolute_url()
     if request.method == 'POST':
         poem.delete()
@@ -86,7 +87,7 @@ def delete_poem(request, poem_pk):
 
 
 @login_required
-def add_poet(request):
+def poet_create(request):
     template_name = 'poems/poet_form.html'
     form = PoetForm()
     if request.method == 'POST':
@@ -98,9 +99,9 @@ def add_poet(request):
 
 
 @login_required
-def update_poet(request, poet_pk):
+def poet_update(request, pk):
     template_name = 'poems/poet_form.html'
-    poet = get_object_or_404(Poet, pk=poet_pk)
+    poet = get_object_or_404(Poet, pk=pk)
     form = PoetForm(instance=poet)
     if request.method == 'POST':
         form = PoetForm(request.POST)
@@ -111,9 +112,9 @@ def update_poet(request, poet_pk):
 
 
 @login_required
-def delete_poet(request, poet_pk):
+def poet_delete(request, pk):
     template_name = 'poems/poet_confirm_delete.html'
-    poet = get_object_or_404(Poet, pk=poet_pk)
+    poet = get_object_or_404(Poet, pk=pk)
     if request.method == 'POST':
         poet.delete()
         return redirect('index')
