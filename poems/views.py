@@ -44,13 +44,21 @@ def poem_view(request, poem_pk):
 @login_required
 def add_poem(request):
     template_name = 'poems/poem_form.html'
-    form = PoemForm()
+    # set author if provided
+    poet_pk = request.GET.get('poet', None)
+    initial = {}
+    if poet_pk is not None:
+        poet = Poet.objects.filter(pk=poet_pk).first()
+        if poet is not None:
+            initial['author'] = poet
+
+    form = PoemForm(initial=initial)
     if request.method == 'POST':
         form = PoemForm(request.POST)
         if form.is_valid():
             poem = form.save()
             return redirect(poem.get_absolute_url())
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form, 'poet_pk': poet_pk})
 
 
 @login_required
