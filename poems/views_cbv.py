@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
@@ -32,7 +33,7 @@ class PoemView(DetailView):
     context_object_name = 'poem'
 
 
-class PoemCreate(CreateView):
+class PoemCreate(LoginRequiredMixin, CreateView):
     model = Poem
     fields = '__all__'
 
@@ -46,12 +47,12 @@ class PoemCreate(CreateView):
         return initial
 
 
-class PoemUpdate(UpdateView):
+class PoemUpdate(LoginRequiredMixin, UpdateView):
     model = Poem
     fields = '__all__'
 
 
-class PoemDelete(DeleteView):
+class PoemDelete(LoginRequiredMixin, DeleteView):
     model = Poem
     success_url = reverse_lazy('index')
 
@@ -61,16 +62,16 @@ class PoemDelete(DeleteView):
         return success_url
 
 
-class PoetCreate(CreateView):
+class PoetCreate(LoginRequiredMixin, CreateView):
     model = Poet
     fields = '__all__'
 
 
-class PoetUpdate(UpdateView):
+class PoetUpdate(LoginRequiredMixin, UpdateView):
     model = Poet
     fields = '__all__'
 
 
-class PoetDelete(DeleteView):
+class PoetDelete(LoginRequiredMixin, DeleteView):
     model = Poet
     success_url = reverse_lazy('index')
