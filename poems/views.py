@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
 
+from .forms import PoetForm, PoemForm
 from .models import Poet, Poem
 
 
@@ -37,3 +39,15 @@ def poem_view(request, poem_pk):
         'poem': poem,
     }
     return render(request, template_name, context)
+
+
+@login_required
+def add_poem(request):
+    template_name = 'poems/poem_form.html'
+    form = PoemForm()
+    if request.method == 'POST':
+        form = PoemForm(request.POST)
+        if form.is_valid():
+            poem = form.save()
+            return redirect(poem.get_absolute_url())
+    return render(request, template_name, {'form': form})
