@@ -51,3 +51,16 @@ def add_poem(request):
             poem = form.save()
             return redirect(poem.get_absolute_url())
     return render(request, template_name, {'form': form})
+
+
+@login_required
+def update_poem(request, poem_pk):
+    template_name = 'poems/poem_form.html'
+    poem = get_object_or_404(Poem, pk=poem_pk)
+    form = PoemForm(instance=poem)
+    if request.method == 'POST':
+        form = PoemForm(request.POST)
+        if form.is_valid():
+            poem = form.save()
+            return redirect(poem.get_absolute_url())
+    return render(request, template_name, {'form': form, 'edit': True})
