@@ -27,6 +27,7 @@
                 <button type="submit" class="btn btn-primary float-right">
                     {% if edit %}Редактировать{% else %}Добавить{% endif %}
                 </button>
+                <a href="{% if poet_pk %}{% url 'poet' poet_pk %}{% else %}{% url 'index' %}{% endif %}" class="btn btn-secondary float-right mr-1">Отмена</a>
               </div>
             </div>
           </form>
