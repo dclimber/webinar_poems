@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-urlpatterns = [
+fbv_patterns = [
     path("", views.index, name="index"),
     path("poet/<int:poet_pk>/", views.poet_view, name="poet"),
     path("poet/add/", views.add_poet, name="add_poet"),
@@ -14,3 +14,9 @@ urlpatterns = [
     path("poem/<int:poem_pk>/edit/", views.update_poem, name="update_poem"),
     path("poem/<int:poem_pk>/delete/", views.delete_poem, name="delete_poem"),
 ]
+
+cbv_patterns = [
+
+]
+
+urlpatterns = fbv_patterns
