@@ -12,6 +12,7 @@
             <div class="col-12">
               {% if user.is_authenticated %}
                 <p class="small text-right m-0">
+                  <a href="{% url 'add_poem' %}?poet={{ poet.pk }}">Добавить стихотворение</a>
                   <a href="{% url 'update_poet' poet.pk %}">Редактировать</a>
                   <a href="{% url 'delete_poet' poet.pk %}" class="text-muted">Удалить</a>
                 </p>
