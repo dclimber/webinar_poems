@@ -11,9 +11,9 @@
       
       <div class="card mb-3">
         <div class="card-body">
-          <form method="GET" action="{% url 'search' %}">
+          <form method="GET" action="">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Что ищем?" aria-label="Search" aria-describedby="button-addon2" name="q">
+              <input type="text" class="form-control" placeholder="Что ищем?" aria-label="Search" aria-describedby="button-addon2" name="q" {% if query %}value="{{ query }}"{% endif %}>
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit" id="search-button">Искать</button>
               </div>
