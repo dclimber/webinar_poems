@@ -72,7 +72,7 @@ def poem_update(request, pk):
         if form.is_valid():
             poem = form.save()
             return redirect(poem.get_absolute_url())
-    return render(request, template_name, {'form': form, 'edit': True})
+    return render(request, template_name, {'form': form, 'poem': poem})
 
 
 @login_required
@@ -108,7 +108,7 @@ def poet_update(request, pk):
         if form.is_valid():
             poet = form.save()
             return redirect(poet.get_absolute_url())
-    return render(request, template_name, {'form': form, 'edit': True})
+    return render(request, template_name, {'form': form, 'poet': poet})
 
 
 @login_required

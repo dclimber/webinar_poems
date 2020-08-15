@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{% if edit %}Редактировать {% else %}Добавить {% endif %}стихотворение{% endblock title %}
+{% block title %}{% if poem %}Редактировать {% else %}Добавить {% endif %}стихотворение{% endblock title %}
 
 {% block content %}
 <div class="d-flex">
@@ -16,7 +16,7 @@
     <div class="col-12 col-md-10 col-lg-8 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h1 class="text-center mb-5">{% if edit %}Редактировать {% else %}Добавить {% endif %}стихотворение</h1>
+          <h1 class="text-center mb-5">{% if poem %}Редактировать {% else %}Добавить {% endif %}стихотворение</h1>
           {% include "partials/form_errors.html" %}
           <form action="" method="POST">
             {% csrf_token %}
@@ -25,7 +25,7 @@
             <div class="form-group row">
               <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary float-right">
-                    {% if edit %}Редактировать{% else %}Добавить{% endif %}
+                    {% if poem %}Редактировать{% else %}Добавить{% endif %}
                 </button>
                 <a href="#" class="btn btn-secondary float-right mr-1" onclick="javascript:window.history.back();">Отмена</a>
               </div>
