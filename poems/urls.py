@@ -8,4 +8,5 @@ urlpatterns = [
     path("poem/<int:poem_pk>/", views.poem_view, name="poem"),
     path("poem/add/", views.add_poem, name="add_poem"),
     path("poem/<int:poem_pk>/edit/", views.update_poem, name="update_poem"),
+    path("poem/<int:poem_pk>/delete/", views.delete_poem, name="delete_poem"),
 ]

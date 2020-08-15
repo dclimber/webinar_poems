@@ -64,3 +64,14 @@ def update_poem(request, poem_pk):
             poem = form.save()
             return redirect(poem.get_absolute_url())
     return render(request, template_name, {'form': form, 'edit': True})
+
+
+@login_required
+def delete_poem(request, poem_pk):
+    template_name = 'poems/poem_confirm_delete.html'
+    poem = get_object_or_404(Poem, pk=poem_pk)
+    poet_url = poem.author.get_absolute_url()
+    if request.method == 'POST':
+        poem.delete()
+        return redirect(poet_url)
+    return render(request, template_name, {'poem': poem})

@@ -18,7 +18,10 @@
       <div class="card">
         <div class="card-body">
           {% if user.is_authenticated %}
-            <p class="small text-right m-0"><a href="{% url 'update_poem' poem.pk %}">Редактировать</a></p>
+            <p class="small text-right m-0">
+              <a href="{% url 'update_poem' poem.pk %}">Редактировать</a>
+              <a href="{% url 'delete_poem' poem.pk %}" class="text-muted">Удалить</a>
+            </p>
           {% endif %}
           <h1 class="text-center mb-5">{{ poem.title }}</h1>
           <div class="poem-text text-center">
