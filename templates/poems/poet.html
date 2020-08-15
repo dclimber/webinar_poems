@@ -10,6 +10,12 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12">
+              {% if user.is_authenticated %}
+                <p class="small text-right m-0">
+                  <a href="{% url 'update_poet' poet.pk %}">Редактировать</a>
+                  <a href="{% url 'delete_poet' poet.pk %}" class="text-muted">Удалить</a>
+                </p>
+              {% endif %}
               <h1 class="text-center mb-5">{{ poet.full_name }}</h1>
             </div>
             <div class="col-12 col-lg-4 text-center">

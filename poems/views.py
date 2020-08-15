@@ -75,3 +75,38 @@ def delete_poem(request, poem_pk):
         poem.delete()
         return redirect(poet_url)
     return render(request, template_name, {'poem': poem})
+
+
+@login_required
+def add_poet(request):
+    template_name = 'poems/poet_form.html'
+    form = PoetForm()
+    if request.method == 'POST':
+        form = PoetForm(request.POST)
+        if form.is_valid():
+            poet = form.save()
+            return redirect(poet.get_absolute_url())
+    return render(request, template_name, {'form': form})
+
+
+@login_required
+def update_poet(request, poet_pk):
+    template_name = 'poems/poet_form.html'
+    poet = get_object_or_404(Poet, pk=poet_pk)
+    form = PoetForm(instance=poet)
+    if request.method == 'POST':
+        form = PoetForm(request.POST)
+        if form.is_valid():
+            poet = form.save()
+            return redirect(poet.get_absolute_url())
+    return render(request, template_name, {'form': form, 'edit': True})
+
+
+@login_required
+def delete_poet(request, poet_pk):
+    template_name = 'poems/poet_confirm_delete.html'
+    poet = get_object_or_404(Poet, pk=poet_pk)
+    if request.method == 'POST':
+        poet.delete()
+        return redirect('index')
+    return render(request, template_name, {'poet': poet})

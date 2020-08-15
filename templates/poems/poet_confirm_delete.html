@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Удалить поэта{% endblock title %}
+
+{% block content %}
+<div class="d-flex">
+  <div>
+    <a class="btn btn-info-outline btn-sm" href="{% url 'poet' poet.pk %}">← Назад</a>
+  </div>
+  <div class="flex-grow-1">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center">Удалить поэта</h1>
+          <p class="lead">Вы точно хотите удалить поэта «<strong>{{ poet.full_name }}</strong>»?</p>
+          <form action="" method="POST" class="float-right">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                Да
+            </button>
+            <a href="{% url 'poet' poet.pk %}" class="btn btn-success">
+                Нет
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
