@@ -4,7 +4,7 @@
 {% block content %}
 <div class="d-flex">
   <div>
-    <a class="btn btn-info-outline btn-sm" href="{% url 'poet' poem.author.pk %}">← Назад</a>
+    <a class="btn btn-info-outline btn-sm" href="#" onclick="javascript:window.history.back();">← Назад</a>
   </div>
   <div class="flex-grow-1">
     <h2 class="text-center mb-5">{{ poem.author.full_name }}</h2>
