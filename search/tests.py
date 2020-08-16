@@ -30,6 +30,12 @@ class TestSearch(TestCase):
     def setUp(self):
         self.client = Client()
 
+        self.urls_to_test = (
+            (reverse('search'), 'Search Function-based View'),
+            (reverse('search_view'), 'SearchView Class-based View'),
+            (reverse('search_template'), 'SearchTemplateView Class-based View')
+        )
+
     def _check_response(self, url, results, search, query):
         response = self.client.get(
             url
@@ -43,12 +49,7 @@ class TestSearch(TestCase):
         self.assertEquals(response.context['query'], query)
 
     def test_search_empty_query(self):
-        urls = (
-            (reverse('search'), 'Search function view'),
-            (reverse('search_view'), 'SearchView'),
-            (reverse('search_template'), 'SearchTemplateView')
-        )
-        for url, sub_description in urls:
+        for url, sub_description in self.urls_to_test:
             with self.subTest(sub_description):
                 self._check_response(
                     url,
@@ -58,12 +59,7 @@ class TestSearch(TestCase):
                 )
 
     def test_search_valid_query_poet(self):
-        urls = (
-            (reverse('search'), 'Search function view'),
-            (reverse('search_view'), 'SearchView'),
-            (reverse('search_template'), 'SearchTemplateView')
-        )
-        for url, sub_description in urls:
+        for url, sub_description in self.urls_to_test:
             with self.subTest(sub_description):
                 query = 'Jul'
                 search_url = f"{url}?q={query}"
@@ -75,12 +71,7 @@ class TestSearch(TestCase):
                 )
 
     def test_search_valid_query_poem(self):
-        urls = (
-            (reverse('search'), 'Search function view'),
-            (reverse('search_view'), 'SearchView'),
-            (reverse('search_template'), 'SearchTemplateView')
-        )
-        for url, sub_description in urls:
+        for url, sub_description in self.urls_to_test:
             with self.subTest(sub_description):
                 query = 'Ezek'
                 search_url = f"{url}?q={query}"
@@ -92,12 +83,7 @@ class TestSearch(TestCase):
                 )
 
     def test_search_invalid_query(self):
-        urls = (
-            (reverse('search'), 'Search function view'),
-            (reverse('search_view'), 'SearchView'),
-            (reverse('search_template'), 'SearchTemplateView')
-        )
-        for url, sub_description in urls:
+        for url, sub_description in self.urls_to_test:
             with self.subTest(sub_description):
                 query = 'Test'
                 search_url = f"{url}?q={query}"
