@@ -24,7 +24,7 @@ def poet_view(request, pk):
 
     context = {
         'poet': poet,
-        'poems': poet.poem_set.all(),
+        'poems': poems,
         'divide_at': divide_at
     }
     return render(request, template_name, context)
@@ -66,12 +66,10 @@ def poem_create(request):
 def poem_update(request, pk):
     template_name = 'poems/poem_form.html'
     poem = get_object_or_404(Poem, pk=pk)
-    form = PoemForm(instance=poem)
-    if request.method == 'POST':
-        form = PoemForm(request.POST)
-        if form.is_valid():
-            poem = form.save()
-            return redirect(poem.get_absolute_url())
+    form = PoemForm(request.POST or None, instance=poem)
+    if form.is_valid():
+        form.save()
+        return redirect(poem.get_absolute_url())
     return render(request, template_name, {'form': form, 'poem': poem})
 
 
@@ -102,12 +100,10 @@ def poet_create(request):
 def poet_update(request, pk):
     template_name = 'poems/poet_form.html'
     poet = get_object_or_404(Poet, pk=pk)
-    form = PoetForm(instance=poet)
-    if request.method == 'POST':
-        form = PoetForm(request.POST)
-        if form.is_valid():
-            poet = form.save()
-            return redirect(poet.get_absolute_url())
+    form = PoetForm(request.POST or None, instance=poet)
+    if form.is_valid():
+        form.save()
+        return redirect(poet.get_absolute_url())
     return render(request, template_name, {'form': form, 'poet': poet})
 
 
