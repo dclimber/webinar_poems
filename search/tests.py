@@ -30,12 +30,6 @@ class TestSearch(TestCase):
     def setUp(self):
         self.client = Client()
 
-        self.urls_to_test = (
-            (reverse('search'), 'Search Function-based View'),
-            (reverse('search_view'), 'SearchView Class-based View'),
-            (reverse('search_template'), 'SearchTemplateView Class-based View')
-        )
-
     def _check_response(self, url, results, search, query):
         response = self.client.get(
             url
@@ -48,48 +42,65 @@ class TestSearch(TestCase):
         self.assertEquals(response.context['search'], search)
         self.assertEquals(response.context['query'], query)
 
-    def test_search_empty_query(self):
-        for url, sub_description in self.urls_to_test:
+    def test_search_fbv(self):
+        subtests = {
+            'Empty search query': ([], False, None),
+            'Valid poet search query': ([self.poet], True, 'Jul'),
+            'Valid poem search query': ([self.poem], True, 'Ezek'),
+            'Invalid search query': ([], True, 'Test'),
+        }
+        for sub_description in subtests:
             with self.subTest(sub_description):
-                self._check_response(
-                    url,
-                    [],
-                    False,
-                    None
-                )
-
-    def test_search_valid_query_poet(self):
-        for url, sub_description in self.urls_to_test:
-            with self.subTest(sub_description):
-                query = 'Jul'
-                search_url = f"{url}?q={query}"
+                url = reverse('search')
+                search_url = url
+                result, search, query = subtests[sub_description]
+                if query is not None:
+                    search_url = f"{url}?q={query}"
                 self._check_response(
                     search_url,
-                    [self.poet],
-                    True,
+                    result,
+                    search,
                     query
                 )
 
-    def test_search_valid_query_poem(self):
-        for url, sub_description in self.urls_to_test:
+    def test_search_view_cbv(self):
+        subtests = {
+            'Empty search query': ([], False, None),
+            'Valid poet search query': ([self.poet], True, 'Jul'),
+            'Valid poem search query': ([self.poem], True, 'Ezek'),
+            'Invalid search query': ([], True, 'Test'),
+        }
+        for sub_description in subtests:
             with self.subTest(sub_description):
-                query = 'Ezek'
-                search_url = f"{url}?q={query}"
+                url = reverse('search_view')
+                search_url = url
+                result, search, query = subtests[sub_description]
+                if query is not None:
+                    search_url = f"{url}?q={query}"
                 self._check_response(
                     search_url,
-                    [self.poem],
-                    True,
+                    result,
+                    search,
                     query
                 )
 
-    def test_search_invalid_query(self):
-        for url, sub_description in self.urls_to_test:
+    def test_search_template_view_cbv(self):
+        subtests = {
+            'Empty search query': ([], False, None),
+            'Valid poet search query': ([self.poet], True, 'Jul'),
+            'Valid poem search query': ([self.poem], True, 'Ezek'),
+            'Invalid search query': ([], True, 'Test'),
+        }
+        for sub_description in subtests:
             with self.subTest(sub_description):
-                query = 'Test'
-                search_url = f"{url}?q={query}"
+                url = reverse('search_template')
+                search_url = url
+                result, search, query = subtests[sub_description]
+                if query is not None:
+                    search_url = f"{url}?q={query}"
                 self._check_response(
                     search_url,
-                    [],
-                    True,
+                    result,
+                    search,
                     query
                 )
