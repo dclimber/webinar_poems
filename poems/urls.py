@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import views_cbv as cbv
 
 fbv_patterns = [
     path("", views.index, name="index"),
@@ -16,7 +17,20 @@ fbv_patterns = [
 ]
 
 cbv_patterns = [
+    path("", cbv.Index.as_view(), name="index"),
+    path("poet/<int:pk>/", cbv.PoetView.as_view(), name="poet"),
+    path("poet/add/", cbv.PoetCreate.as_view(), name="add_poet"),
+    path("poet/<int:pk>/edit/", cbv.PoetUpdate.as_view(),
+         name="update_poet"),
+    path("poet/<int:pk>/delete/", cbv.PoetDelete.as_view(),
+         name="delete_poet"),
 
+    path("poem/<int:pk>/", cbv.PoemView.as_view(), name="poem"),
+    path("poem/add/", cbv.PoemCreate.as_view(), name="add_poem"),
+    path("poem/<int:pk>/edit/", cbv.PoemUpdate.as_view(),
+         name="update_poem"),
+    path("poem/<int:pk>/delete/", cbv.PoemDelete.as_view(),
+         name="delete_poem"),
 ]
 
-urlpatterns = fbv_patterns
+urlpatterns = cbv_patterns
